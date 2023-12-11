@@ -1,22 +1,24 @@
-import { createElement } from '../render.js';
+import { createElement } from '../render';
 
-const createPointListTemplate = () =>
-  '<ul class="trip-point__list">\
-  </ul>';
+const createPointsListTemplate = () => '<ul class="trip-events__list">';
 
-export default class PointListView {
-  getTemplate() {
-    return createPointListTemplate();
+export default class PointsListView {
+  #element = null;
+
+  constructor() {
+    this.#element = null;
   }
 
-  getElement() {
-    if (!this.element) {
-      this.element = createElement(this.getTemplate());
-    }
-    return this.element;
+  get template() {
+    return createPointsListTemplate();
+  }
+
+  get element() {
+    this.#element = this.#element || createElement(this.template);
+    return this.#element;
   }
 
   removeElement() {
-    this.element = null;
+    this.#element = null;
   }
 }

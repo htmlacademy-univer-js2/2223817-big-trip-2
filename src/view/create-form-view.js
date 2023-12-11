@@ -1,6 +1,6 @@
-import { createElement } from '../render.js';
+import { createElement } from '../render';
 
-const createCreateFormTemplate = () => (
+const createFormTemplate = () =>
   `<li class="trip-events__item">
   <form class="event event--edit" action="#" method="post">
     <header class="event__header">
@@ -58,9 +58,9 @@ const createCreateFormTemplate = () => (
         </label>
         <input class="event__input  event__input--destination" id="event-destination-1" type="text" name="event-destination" value="Geneva" list="destination-list-1">
         <datalist id="destination-list-1">
+          <option value="Dublin"></option>
+          <option value="Copenhagen"></option>
           <option value="Amsterdam"></option>
-          <option value="Geneva"></option>
-          <option value="Chamonix"></option>
         </datalist>
       </div>
       <div class="event__field-group  event__field-group--time">
@@ -141,23 +141,25 @@ const createCreateFormTemplate = () => (
       </section>
     </section>
   </form>
-</li>`
-);
+</li>`;
 
-export default class CreateFormView {
-  getTemplate () {
-    return createCreateFormTemplate;
+export default class NewPointView {
+  #element = null;
+
+  constructor() {
+    this.#element = null;
   }
 
-  getElement() {
-    if (!this.element){
-      this.element = createElement(this.getTemplate());
-    }
+  get template() {
+    return createFormTemplate();
+  }
 
-    return this.element;
+  get element() {
+    this.#element = this.#element || createElement(this.template);
+    return this.#element;
   }
 
   removeElement() {
-    this.element = null;
+    this.#element = null;
   }
 }
