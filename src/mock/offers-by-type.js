@@ -4,7 +4,7 @@ import {createOffer} from './offer';
 const OFFER_TYPES = ['taxi', 'bus', 'train', 'ship', 'drive', 'flight', 'check-in', 'sightseeing', 'restaurant'];
 
 const createOffers = () => {
-  let offers = [];
+  const offers = [];
   for (let i = 0; i < randomInteger(1, 4); i++) {
     offers.push(createOffer(i));
   }

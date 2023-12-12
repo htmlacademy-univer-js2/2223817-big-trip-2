@@ -19,7 +19,7 @@ const createOffersTemplate = (offers, type, activeOffersIds) => {
 
 const createPointTemplate = (tripEvent, destinations, offersByType) => {
   let { dateFrom, dateTo } = tripEvent;
-  const { BASE_PRICE, destination: DESTINATION, IS_FAVORITE, offers: OFFERS, type: TYPE } = tripEvent;
+  const { basePrice: BASE_PRICE, destination: DESTINATION, isFavorite: IS_FAVORITE, offers: OFFERS, type: TYPE } = tripEvent;
 
   dateFrom = dayjs(dateFrom);
   dateTo = dayjs(dateTo);
