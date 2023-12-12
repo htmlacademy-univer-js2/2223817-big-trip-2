@@ -19,9 +19,9 @@ export default class PointModel {
       this.#offersByType.push(createOfferByType(i));
     }
 
-    for (let i = 0; i < 4; i++) {
-      this.#event.push(createEvent(i));
-    }
+    // for (let i = 0; i < 4; i++) {
+    //   this.#event.push(createEvent(i));
+    // }
   }
 
   get event() {

@@ -20,9 +20,9 @@ const createOffersTemplate = (offers, type, activeOffersIds) => {
     .join('\n');
 };
 
-const createEditTemplate = (point, destinations, offersByType) => {
-  let { dateFrom, dateTo } = point;
-  const { basePrice, destination, type, offers } = point;
+const createEditTemplate = (event, destinations, offersByType) => {
+  let { dateFrom, dateTo } = event;
+  const { basePrice, destination, type, offers } = event;
 
   dateFrom = dayjs(dateFrom);
   dateTo = dayjs(dateTo);
@@ -134,20 +134,20 @@ const createEditTemplate = (point, destinations, offersByType) => {
 };
 
 export default class EditPointView {
-  #point = null;
+  #event = null;
   #destinations = null;
   #offersByType = null;
   #element = null;
 
-  constructor(point, destinations, offersByType) {
-    this.#point = point;
+  constructor(event, destinations, offersByType) {
+    this.#event = event;
     this.#destinations = destinations;
     this.#offersByType = offersByType;
     this.#element = null;
   }
 
   get template() {
-    return createEditTemplate(this.#point, this.#destinations, this.#offersByType);
+    return createEditTemplate(this.#event, this.#destinations, this.#offersByType);
   }
 
   get element() {
