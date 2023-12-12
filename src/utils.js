@@ -1,6 +1,6 @@
 export const randomInteger = (min, max) => {
-  const random = min + Math.random() * (max + 1 - min);
-  return Math.floor(random);
+  const Random = min + Math.random() * (max + 1 - min);
+  return Math.floor(Random);
 };
 
 export function upperCaseFirst(str) {
@@ -12,21 +12,21 @@ export function upperCaseFirst(str) {
 }
 
 export const standartizeDateTime = (dateFrom, dateTo) => {
-  const oneMinuteInMilliseconds = 60 * 1000;
-  const oneHourInMilliseconds = 60 * oneMinuteInMilliseconds;
-  const oneDayInMilliseconds = 24 * oneHourInMilliseconds;
+  const ONE_MINUTE_IN_MILLISECONDS = 60 * 1000;
+  const ONE_HOUR_IN_MILLISECONDS = 60 * ONE_MINUTE_IN_MILLISECONDS;
+  const ONE_DAY_IN_MILLISECONDS = 24 * ONE_HOUR_IN_MILLISECONDS;
 
-  const datetimeBetween = dateTo.diff(dateFrom);
-  if (datetimeBetween > oneDayInMilliseconds) {
-    return `${parseInt(datetimeBetween / oneDayInMilliseconds, 10)}D ${parseInt(
-      (datetimeBetween % oneDayInMilliseconds) / oneHourInMilliseconds,
+  const DATETIME_BETWEEN = dateTo.diff(dateFrom);
+  if (DATETIME_BETWEEN > ONE_DAY_IN_MILLISECONDS) {
+    return `${parseInt(DATETIME_BETWEEN / ONE_DAY_IN_MILLISECONDS, 10)}D ${parseInt(
+      (DATETIME_BETWEEN % ONE_DAY_IN_MILLISECONDS) / ONE_HOUR_IN_MILLISECONDS,
       10
-    )}H ${parseInt(datetimeBetween % oneHourInMilliseconds, 10) / oneMinuteInMilliseconds}M`;
-  } else if (datetimeBetween > oneHourInMilliseconds) {
-    return `${parseInt((datetimeBetween % oneDayInMilliseconds) / oneHourInMilliseconds, 10)}H ${
-      parseInt(datetimeBetween % oneHourInMilliseconds, 10) / oneMinuteInMilliseconds
+    )}H ${parseInt(DATETIME_BETWEEN % ONE_HOUR_IN_MILLISECONDS, 10) / ONE_MINUTE_IN_MILLISECONDS}M`;
+  } else if (DATETIME_BETWEEN > ONE_HOUR_IN_MILLISECONDS) {
+    return `${parseInt((DATETIME_BETWEEN % ONE_DAY_IN_MILLISECONDS) / ONE_HOUR_IN_MILLISECONDS, 10)}H ${
+      parseInt(DATETIME_BETWEEN % ONE_HOUR_IN_MILLISECONDS, 10) / ONE_MINUTE_IN_MILLISECONDS
     }M`;
   } else {
-    return `${parseInt(datetimeBetween % oneHourInMilliseconds, 10) / oneMinuteInMilliseconds}M`;
+    return `${parseInt(DATETIME_BETWEEN % ONE_HOUR_IN_MILLISECONDS, 10) / ONE_MINUTE_IN_MILLISECONDS}M`;
   }
 };

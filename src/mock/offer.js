@@ -1,9 +1,9 @@
-import { randomInteger } from '../utils';
+import {randomInteger} from '../utils';
 
-const titles = ['First', 'Business', 'Economy'];
+const TITLES = ['First', 'Business', 'Economy'];
 
 export const createOffer = (id) => ({
   id: id,
-  title: titles[randomInteger(0, titles.length - 1)],
+  title: TITLES[randomInteger(0, TITLES.length - 1)],
   price: randomInteger(10, 500),
 });

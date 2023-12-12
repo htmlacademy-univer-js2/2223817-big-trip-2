@@ -22,12 +22,12 @@ const createOffersTemplate = (offers, type, activeOffersIds) => {
 
 const createEditTemplate = (event, destinations, offersByType) => {
   let { dateFrom, dateTo } = event;
-  const { basePrice, destination, type, offers } = event;
+  const { BASE_PRICE, destination: DESTINATION, type: TYPE, offers: OFFERS } = event;
 
   dateFrom = dayjs(dateFrom);
   dateTo = dayjs(dateTo);
-  const destinationObj = destinations[destination];
-  const offersTemplate = createOffersTemplate(offersByType, type, offers);
+  const DESTINATION_NAME = destinations[DESTINATION];
+  const OFFERS_TEMPLATE = createOffersTemplate(offersByType, TYPE, OFFERS);
 
   return `
   <li class="trip-events__item">
@@ -36,7 +36,7 @@ const createEditTemplate = (event, destinations, offersByType) => {
         <div class="event__type-wrapper">
           <label class="event__type  event__type-btn" for="event-type-toggle-1">
             <span class="visually-hidden">Choose event type</span>
-            <img class="event__type-icon" width="17" height="17" src="img/icons/${type}.png" alt="Event type icon">
+            <img class="event__type-icon" width="17" height="17" src="img/icons/${TYPE}.png" alt="Event type icon">
           </label>
           <input class="event__type-toggle  visually-hidden" id="event-type-toggle-1" type="checkbox">
           <div class="event__type-list">
@@ -83,10 +83,10 @@ const createEditTemplate = (event, destinations, offersByType) => {
         </div>
         <div class="event__field-group  event__field-group--destination">
           <label class="event__label  event__type-output" for="event-destination-1">
-            ${upperCaseFirst(type)}
+            ${upperCaseFirst(TYPE)}
           </label>
           <input class="event__input  event__input--destination" id="event-destination-1" type="text" name="event-destination"
-            value="${destinationObj.name}" list="destination-list-1">
+            value="${DESTINATION_NAME.name}" list="destination-list-1">
           <datalist id="destination-list-1">
             <option value="Dublin"></option>
             <option value="Copenhagen"></option>
@@ -107,7 +107,7 @@ const createEditTemplate = (event, destinations, offersByType) => {
             <span class="visually-hidden">Price</span>
             &euro;
           </label>
-          <input class="event__input  event__input--price" id="event-price-1" type="text" name="event-price" value="${basePrice}">
+          <input class="event__input  event__input--price" id="event-price-1" type="text" name="event-price" value="${BASE_PRICE}">
         </div>
         <button class="event__save-btn  btn  btn--blue" type="submit">Save</button>
         <button class="event__reset-btn" type="reset">Delete</button>
@@ -119,13 +119,13 @@ const createEditTemplate = (event, destinations, offersByType) => {
         <section class="event__section  event__section--offers">
           <h3 class="event__section-title  event__section-title--offers">Offers</h3>
           <div class="event__available-offers">
-            ${offersTemplate}
+            ${OFFERS_TEMPLATE}
           </div>
         </section>
         <section class="event__section  event__section--destination">
           <h3 class="event__section-title  event__section-title--destination">Destination</h3>
           <p class="event__destination-description">
-            ${destinationObj.description}
+            ${DESTINATION_NAME.description}
           </p>
         </section>
       </section>

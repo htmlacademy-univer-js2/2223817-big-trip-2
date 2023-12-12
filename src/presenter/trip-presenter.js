@@ -11,7 +11,7 @@ export default class Trip {
   #container = null;
 
   #pointsModel = null;
-  #event = [];
+  #tripEvent = [];
   #destinations = [];
   #offersByType = [];
 
@@ -20,9 +20,9 @@ export default class Trip {
     this.#pointsModel = pointsModel;
   }
 
-  #renderPoint(event) {
-    const pointElement = new PointView(event, this.#destinations, this.#offersByType);
-    const editFormElement = new EditPointView(event, this.#destinations, this.#offersByType);
+  #renderPoint(tripEvent) {
+    const pointElement = new PointView(tripEvent, this.#destinations, this.#offersByType);
+    const editFormElement = new EditPointView(tripEvent, this.#destinations, this.#offersByType);
 
     const replacePointToForm = () => {
       this.#pointsListComponent.element.replaceChild(editFormElement.element, pointElement.element);
@@ -60,19 +60,19 @@ export default class Trip {
   }
 
   init() {
-    this.#event = [...this.#pointsModel.event];
+    this.#tripEvent = [...this.#pointsModel.tripEvent];
     this.#destinations = [...this.#pointsModel.destinations];
     this.#offersByType = [...this.#pointsModel.offersByType];
 
-    if (this.#event.length === 0) {
+    if (this.#tripEvent.length === 0) {
       render(new EmptyListView(), this.#container);
     } else {
       render(new InfoView(), document.querySelector('.trip-main'), RenderPosition.AFTERBEGIN);
       render(new SortView(), this.#container);
       render(this.#pointsListComponent, this.#container);
 
-      for (let i = 0; i < this.#event.length; i++) {
-        this.#renderPoint(this.#event[i]);
+      for (let i = 0; i < this.#tripEvent.length; i++) {
+        this.#renderPoint(this.#tripEvent[i]);
       }
     }
   }

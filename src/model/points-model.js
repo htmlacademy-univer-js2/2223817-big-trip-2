@@ -1,16 +1,16 @@
 import {createDestination} from '../mock/destination';
 import {createOfferByType} from '../mock/offers-by-type';
-import {createEvent} from '../mock/event';
+import {createEvent} from '../mock/trip-event';
 
 export default class PointModel {
   #destinations = null;
   #offersByType = null;
-  #event = null;
+  #tripEvent = null;
 
   constructor() {
     this.#destinations = [];
     this.#offersByType = [];
-    this.#event = [];
+    this.#tripEvent = [];
 
     for (let i = 0; i < 10; i++) {
       this.#destinations.push(createDestination(i));
@@ -18,14 +18,15 @@ export default class PointModel {
     for (let i = 0; i < 9; i++) {
       this.#offersByType.push(createOfferByType(i));
     }
-
-    // for (let i = 0; i < 4; i++) {
-    //   this.#event.push(createEvent(i));
-    // }
+// Для отображения текста об отсутствии событий закомментрировать эту часть
+    for (let i = 0; i < 4; i++) {
+      this.#tripEvent.push(createEvent(i));
+    }
+//
   }
 
-  get event() {
-    return this.#event;
+  get tripEvent() {
+    return this.#tripEvent;
   }
 
   get destinations() {

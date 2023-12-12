@@ -1,10 +1,10 @@
-import { randomInteger } from '../utils';
-import { createOffer } from './offer';
+import {randomInteger} from '../utils';
+import {createOffer} from './offer';
 
-const offerTypes = ['taxi', 'bus', 'train', 'ship', 'drive', 'flight', 'check-in', 'sightseeing', 'restaurant'];
+const OFFER_TYPES = ['taxi', 'bus', 'train', 'ship', 'drive', 'flight', 'check-in', 'sightseeing', 'restaurant'];
 
 const createOffers = () => {
-  const offers = [];
+  let offers = [];
   for (let i = 0; i < randomInteger(1, 4); i++) {
     offers.push(createOffer(i));
   }
@@ -12,6 +12,6 @@ const createOffers = () => {
 };
 
 export const createOfferByType = (i) => ({
-  type: offerTypes[i],
+  type: OFFER_TYPES[i],
   offers: createOffers(),
 });

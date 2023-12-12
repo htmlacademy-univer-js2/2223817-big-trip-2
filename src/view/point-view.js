@@ -3,8 +3,8 @@ import { standartizeDateTime, upperCaseFirst } from '../utils';
 import { createElement } from '../render';
 
 const createOffersTemplate = (offers, type, activeOffersIds) => {
-  const offersByType = offers.filter((offer) => offer.type === type)[0].offers;
-  return offersByType
+  const OFFERS_BY_TYPE = offers.filter((offer) => offer.type === type)[0].offers;
+  return OFFERS_BY_TYPE
     .map((offer) => {
       return activeOffersIds.includes(offer.id)
         ? `<li class="event__offer">
@@ -17,40 +17,40 @@ const createOffersTemplate = (offers, type, activeOffersIds) => {
     .join('\n');
 };
 
-const createPointTemplate = (point, destinations, offersByType) => {
-  let { dateFrom, dateTo } = point;
-  const { basePrice, destination, isFavorite, offers, type } = point;
+const createPointTemplate = (tripEvent, destinations, offersByType) => {
+  let { dateFrom, dateTo } = tripEvent;
+  const { BASE_PRICE, destination: DESTINATION, IS_FAVORITE, offers: OFFERS, type: TYPE } = tripEvent;
 
   dateFrom = dayjs(dateFrom);
   dateTo = dayjs(dateTo);
-  const datetimeBetween = standartizeDateTime(dateFrom, dateTo);
-  const destinationName = destinations[destination].name;
+  const DATETIME_BETWEEN = standartizeDateTime(dateFrom, dateTo);
+  const DESTINATION_NAME = destinations[DESTINATION].name;
 
-  const activeOffersTemplate = createOffersTemplate(offersByType, type, offers);
+  const activeOffersTemplate = createOffersTemplate(offersByType, TYPE, OFFERS);
 
   return `<li class="trip-events__item">
     <div class="event">
       <time class="event__date" datetime="2019-03-18">${dateFrom.format('MMM D')}</time>
       <div class="event__type">
-        <img class="event__type-icon" width="42" height="42" src="img/icons/${type}.png" alt="Event type icon">
+        <img class="event__type-icon" width="42" height="42" src="img/icons/${TYPE}.png" alt="Event type icon">
       </div>
-      <h3 class="event__title">${upperCaseFirst(type)} ${destinationName}</h3>
+      <h3 class="event__title">${upperCaseFirst(TYPE)} ${DESTINATION_NAME}</h3>
       <div class="event__schedule">
         <p class="event__time">
           <time class="event__start-time" datetime="${dateFrom}">${dateFrom.format('HH:mm')}</time>
           &mdash;
           <time class="event__end-time" datetime="${dateTo}">${dateTo.format('HH:mm')}</time>
         </p>
-        <p class="event__duration">${datetimeBetween}</p>
+        <p class="event__duration">${DATETIME_BETWEEN}</p>
       </div>
       <p class="event__price">
-        &euro;&nbsp;<span class="event__price-value">${basePrice}</span>
+        &euro;&nbsp;<span class="event__price-value">${BASE_PRICE}</span>
       </p>
       <h4 class="visually-hidden">Offers:</h4>
       <ul class="event__selected-offers">
       ${activeOffersTemplate}
       </ul>
-      <button class="event__favorite-btn ${isFavorite ? 'event__favorite-btn--active' : ''}" type="button">
+      <button class="event__favorite-btn ${IS_FAVORITE ? 'event__favorite-btn--active' : ''}" type="button">
         <span class="visually-hidden">Add to favorite</span>
         <svg class="event__favorite-icon" width="28" height="28" viewBox="0 0 28 28">
           <path d="M14 21l-8.22899 4.3262 1.57159-9.1631L.685209 9.67376 9.8855 8.33688 14 0l4.1145 8.33688 9.2003 1.33688-6.6574 6.48934 1.5716 9.1631L14 21z"/>
@@ -64,20 +64,20 @@ const createPointTemplate = (point, destinations, offersByType) => {
 };
 
 export default class PointView {
-  #event = null;
+  #tripEvent = null;
   #destinations = null;
   #offersByType = null;
   #element = null;
 
-  constructor(event, destinations, offersByType) {
-    this.#event = event;
+  constructor(tripEvent, destinations, offersByType) {
+    this.#tripEvent = tripEvent;
     this.#destinations = destinations;
     this.#offersByType = offersByType;
     this.#element = null;
   }
 
   get template() {
-    return createPointTemplate(this.#event, this.#destinations, this.#offersByType);
+    return createPointTemplate(this.#tripEvent, this.#destinations, this.#offersByType);
   }
 
   get element() {
